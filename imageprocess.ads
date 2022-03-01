@@ -14,9 +14,9 @@
 ----------------------------------------------------------------------------------------------------
 
 package imageprocess is
-    function imageINV();
-    function imageLOG();
-    function imageSTRETCH();
-    function makeHIST() return integer;
-    function histEQUAL() return integer;
+    function imageINV(data: in image) return image;
+    function imageLOG(data: in image) return image;
+    function imageSTRETCH(data: in image, iMax: in integer, iMin: in integer) return image;
+    function makeHIST(data: in image) return image;
+    function histEQUAL(data: in image) return image;
 end imageprocess

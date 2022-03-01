@@ -9,6 +9,6 @@
 --         2. call readPGM to write data from a record into a file
 ----------------------------------------------------------------------------------------------------
 package imagepgm is
-    function readPGM;
-    function writePGM;
+    procedure readPGM(data: out image, file: in unbounded_string);
+    procedure writePGM(data: in image, file: in unbounded_string);
 end imagepgm;
