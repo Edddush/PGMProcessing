@@ -8,6 +8,3 @@
 --     and transformations they would like to apply to an image.
 ------------------------------------------------------------------------
 
-
-
-

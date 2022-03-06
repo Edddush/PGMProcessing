@@ -10,8 +10,8 @@ package imageRecord is
  
     type image is 
         record
-            pixel : matrix; 
-            width : integer;
+            pixel  : matrix; 
+            width  : integer;
             height : integer;
         end record;
 end imageRecord;
