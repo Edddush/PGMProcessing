@@ -9,6 +9,9 @@
 --         2. call readPGM to write data from a 2-D array record into a file, create the file 
 --          if it does not` exist.
 ----------------------------------------------------------------------------------------------------
+
+with imageRecord; use imageRecord;
+
 package imagepgm is
     procedure readPGM(data: out image, file: in unbounded_string);
     procedure writePGM(data: in image, file: in unbounded_string);

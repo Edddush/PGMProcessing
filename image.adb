@@ -7,4 +7,8 @@
 --     and imageprocess packages such that they can specify the filenames
 --     and transformations they would like to apply to an image.
 ------------------------------------------------------------------------
+with imageRecord; use imageRecord;
+with imagepgm; use imagepgm;
+
+
 

@@ -6,26 +6,64 @@
 --     This package takes a filename to read from or write to. It allows 
 --     for the exchange of data available from the user and data returned 
 --     after image processing.
-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+with imageRecord; use imageRecord
 
---read data from an ASCII file and store into a record--
-procedure readPGM(data: out image, file: in unbounded_string) is
-    open(inputfp, in_file, file);
-   
-    -- might not need it!--
-    if is_open(inputfp) then
-        close(inputfp);
-    end if
-end readPGM
+package body imagepgm is
+    --read data from an ASCII file and store into a record--
+    procedure readPGM(data: out image, file: in unbounded_string) is
+        inputfp : file_type;
+    begin
+        open(inputfp, in_file, file);
+
+        --read the file that we have opened--
+        get(inputFp, data.magicId);
+        get(inputFp, data.width);
+        get(inputFp, data.height);
+        get(inputFp, data.maxVal);
+
+        for i in 1..data.height loop
+            for j in 1..data.width loop
+                get(inputFp, data.pixel(i,j));
+            end loop
+        end loop
 
 
---write image data from a record into an ASCII file--    
-procedure writePGM(data: in image, file: in unbounded_string) is
-    create(outputfp, out_file, file);
+--add exceptions: file, data range and magic identifier--
 
-    -- might not need it! -- 
-    if is_open(outputfp) then
-        close(outputfp);
-    end if
+
+
+        -- close file pointer! --
+        if is_open(inputFp) then
+            close(inputFp);
+        end if
+    end readPGM
+
+
+    --write image data from a record into an ASCII file--    
+    procedure writePGM(data: in image, file: in unbounded_string) is
+        outputFp : file_type;
+    begin
+    
+        create(outputFp, out_file, file);
+        set_output(outputFp);
+
+        put_line(imagecontent.magic_id);
+        put_line(integer'image(data.width) & " " & integer'image(data.height)); 
+        put_line(integer'image(data.max_val));
+
+        for i in 1..data.height loop 
+            for j in 1..data.width loop
+                put(integer'image(data.pixel(i,j)));
+            end loop;
+            new_line;
+        end loop;
+        new_line;
+
+        --close file pointer!--
+        if is_open(outputFp) then
+            close(outputFp);
+        end if
+    end writePGM
 end writePGM
 
