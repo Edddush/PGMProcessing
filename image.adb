@@ -63,7 +63,7 @@ procedure image is
             return fileName;
         elsif overwrite = 'N' or overwrite = 'n' then
             while valid loop
-                put_line("Please provide a new fileName:");
+                put_line("Please provide a different fileName:");
                 get_line(fileName);
                 valid := validateFile(fileName);
             end loop;
@@ -116,7 +116,7 @@ begin
                 fileName := getOutputFile;
                 writePGM(recData, fileName);
             when 7 =>
-                put_line("I hope you enjoyed the program. THANK YOU!");
+                put_line("You have quit the program. GOODBYE!");
             when others =>
                 put_line("Please choose an option from the menu");
         end case;

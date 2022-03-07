@@ -63,6 +63,7 @@ package body imagepgm is
         end loop;
         new_line;
 
+        set_output(standard_output);
         --close file pointer!--
         close(outputFp);
     end writePGM;
