@@ -37,7 +37,7 @@ package body imageprocess is
     function imageSTRETCH(data: in image; iMax: in integer; iMin: in integer) return image is
         newImage : image;
         max: integer;
-        min:
+        min: integer;
     begin
         max := iMax;
         min := iMin;
