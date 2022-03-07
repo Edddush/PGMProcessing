@@ -99,10 +99,42 @@ begin
             get(choice);
             skip_line;
             
+
+            case choice is
+                when 1 =>
+                    put_line("choice 1");
+                when 2 =>
+                    put_line("choice 2");
+                when 3 =>
+                    put_line("choice 3");
+                when 4 =>
+                    put_line("choice 4");
+                when 5 =>
+                    put_line("choice 5");
+                when 6 =>
+                    put_line("choice 6");
+                when 7 =>
+                    put_line("choice 7");
+                when others =>
+                    put_line("Please choose an option from the menu");
+            end case;
+
+
+
+
+
+
+
+
+
+
+
+
+
 --        exit when userchoice = 7;
-        if choice = 1 then
-            fileName := getInputFile;
-            readPGM (recData, fileName);
+        --if choice = 1 then
+            --fileName := getInputFile;
+            --readPGM (recData, fileName);
       --      if not fileOK then
         --        return 1;
           --  end if;
@@ -119,14 +151,14 @@ begin
         --elsif userchoice = 5 then
          --   imagehist := makehist (imagerec);
           --  imagerec := histequal (imagerec, imagehist);
-        elsif choice = 6 then
-            fileName := getOutputFile;
-            writePGM(recData, fileName);
+        --elsif choice = 6 then
+          --  fileName := getOutputFile;
+          --  writePGM(recData, fileName);
         --else
          --   put_line ("Please Enter a number from the menu (it must be between 1 and 7)");
-        else
-            put_line("Something else");
-        end if;
+        --else
+          --  put_line("Something else");
+        --end if;
 
     end loop;
 return;

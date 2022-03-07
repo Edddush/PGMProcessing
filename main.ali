@@ -13,11 +13,10 @@ RV NO_IO
 RV NO_LOCAL_ALLOCATORS
 RV NO_NESTED_FINALIZATION
 RV NO_SECONDARY_STACK
-RV NO_STANDARD_STORAGE_POOLS
 RV NO_DEFAULT_INITIALIZATION
 RV SPARK_05
 
-U main%b		main.adb		6e56e600 NE OO SU IL
+U main%b		main.adb		ffd68141 NE OO SU IL
 W ada%s			ada.ads			ada.ali
 W ada.directories%s	a-direct.adb		a-direct.ali
 Z ada.exceptions%s	a-except.adb		a-except.ali
@@ -57,7 +56,7 @@ D imagepgm.ads		20220307070913 f9f18d35 imagepgm%s
 D imagerecord.ads	20220307071525 006325a6 imagerecord%s
 D interfac.ads		20180111085525 5ab55268 interfaces%s
 D i-cstrea.ads		20180111085525 e53d8b8e interfaces.c_streams%s
-D main.adb		20220307075143 5a77c5fc main%b
+D main.adb		20220307173649 cbf7a2bd main%b
 D system.ads		20180111085525 4635ec04 system%s
 D s-atocou.ads		20180111085525 b45c2d8d system.atomic_counters%s
 D s-crtl.ads		20180111085525 0ebbdb71 system.crtl%s
@@ -104,34 +103,32 @@ X 16 a-textio.ads
 169U14*Skip_Line 23|100s13
 206U14*Get 23|56s13
 263U14*Put_Line 23|34s13 50s9 55s13 65s17 88s13 90s13 91s13 92s13 93s13 94s13
-. 95s13 96s13 98s13 128s13
+. 95s13 96s13 98s13 105s21 107s21 109s21 111s21 113s21 115s21 117s21 119s21
 X 17 a-tiinio.ads
 56U14*Get 23|99s13[8|18]
 X 19 imagepgm.ads
 17K9*imagepgm 20e13 23|10w6 10r20
-18U15*readPGM 23|105s13
-19U15*writePGM 23|124s13
 X 20 imagerecord.ads
 9K9*imageRecord 20e16 23|11w6 11r23
 12R10*image 19e19 23|79r18
 X 23 main.adb
-19U11*main 19b11 133l5 133t9
+19U11*main 19b11 165l5 165t9
 22V14 validateFile{boolean} 22b14 22>27 25l9 25t21 36s22 52s18 67s26
 22r27 file{13|79R9} 24r33
-28V14 getInputFile{13|79R9} 28b14 40l9 40t21 104s25
+28V14 getInputFile{13|79R9} 28b14 40l9 40t21
 29r9 fileName{13|79R9} 35m22 36r35 39r16
 30b9 valid{boolean} 32m9 33r19 36m13
-43V14 getOutputFile{13|79R9} 43b14 72l9 72t22 123s25
+43V14 getOutputFile{13|79R9} 43b14 72l9 72t22
 44r9 fileName{13|79R9} 51m18 52r31 58r20 62r20 66m26 67r39 71r16
 45b9 invalid{boolean}
 46e9 overwrite{character} 56m17 61r12 61r31 63r15 63r34
 47b9 valid{boolean} 52m9 54r12 64r19 67m17
 77i5 iMax{integer}
 78i5 iMin{integer}
-79r5 recData{20|12R10} 105m22 124r22
-80i5 choice{integer} 84m5 87r15 99m17 103r12 122r15
+79r5 recData{20|12R10}
+80i5 choice{integer} 84m5 87r15 99m17 103r18
 81b5 validData{boolean}
-82r5 fileName{13|79R9} 104m13 105r31 123m13 124r31
+82r5 fileName{13|79R9}
 X 24 system.ads
 67M9*Address
 X 31 s-memory.ads
