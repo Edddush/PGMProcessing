@@ -99,10 +99,10 @@ begin
             get(choice);
             skip_line;
             
-
             case choice is
                 when 1 =>
-                    put_line("choice 1");
+                    fileName := getInputFile;
+                    readPGM (recData, fileName);
                 when 2 =>
                     put_line("choice 2");
                 when 3 =>
@@ -112,54 +112,13 @@ begin
                 when 5 =>
                     put_line("choice 5");
                 when 6 =>
-                    put_line("choice 6");
+                    fileName := getOutputFile;
+                    writePGM(recData, fileName);
                 when 7 =>
                     put_line("choice 7");
                 when others =>
                     put_line("Please choose an option from the menu");
             end case;
-
-
-
-
-
-
-
-
-
-
-
-
-
---        exit when userchoice = 7;
-        --if choice = 1 then
-            --fileName := getInputFile;
-            --readPGM (recData, fileName);
-      --      if not fileOK then
-        --        return 1;
-          --  end if;
-        --elsif userchoice = 2 then
-       --     imagerec:= imageinv (imagerec);
-        --elsif userchoice = 3 then
-         --   imagerec:= imagelog (imagerec);
-       -- elsif userchoice = 4 then
-         --   put("Please enter the minimum intensity value: ");
-           -- get(min);
-           -- put("Please enter the maximum intensity value: ");
-            --get(max);
-            --imagerec:= imagestretch (imagerec, min, max);
-        --elsif userchoice = 5 then
-         --   imagehist := makehist (imagerec);
-          --  imagerec := histequal (imagerec, imagehist);
-        --elsif choice = 6 then
-          --  fileName := getOutputFile;
-          --  writePGM(recData, fileName);
-        --else
-         --   put_line ("Please Enter a number from the menu (it must be between 1 and 7)");
-        --else
-          --  put_line("Something else");
-        --end if;
-
     end loop;
 return;
 end main;
