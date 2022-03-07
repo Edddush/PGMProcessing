@@ -9,8 +9,8 @@
 
 package body imageprocess is
     --inverse the pixels as abs(255−Ixy)--
-    function imageINV(data: in image) return image is 
-        newImage : image;
+    function imageINV(data: in baseImage) return baseImage is 
+        newImage : baseImage;
     begin
         newImage.magicId := data.magicId; 
         newImage.width  := data.width;
@@ -21,8 +21,8 @@ package body imageprocess is
     end imageINV;
 
     --apply logarithm on the pixels as log(Ixy) * 255/log(255)--
-    function imageLOG(data: in image) return image is
-        newImage : image;
+    function imageLOG(data: in baseImage) return baseImage is
+        newImage : baseImage;
     begin
         newImage.magicId := data.magicId; 
         newImage.width  := data.width;
@@ -34,8 +34,8 @@ package body imageprocess is
 
 
     --stretch the pixels as 255*[(Ixy - Imin)/(Imax-Imin)]--
-    function imageSTRETCH(data: in image; iMax: in integer; iMin: in integer) return image is
-        newImage : image;
+    function imageSTRETCH(data: in baseImage; iMax: in integer; iMin: in integer) return baseImage is
+        newImage : baseImage;
         max: integer;
         min: integer;
     begin
@@ -51,8 +51,8 @@ package body imageprocess is
 
 
     --calculate its histogram--
-    function makeHIST(data: in image) return image is 
-        newImage : image; 
+    function makeHIST(data: in baseImage) return baseImage is 
+        newImage : baseImage; 
     begin
         newImage.width := 1;
     return newImage;
@@ -60,8 +60,8 @@ package body imageprocess is
 
 
     --perform its histogram equalization--
-    function histEQUAL(data: in image) return image  is 
-        newImage : image;
+    function histEQUAL(data: in baseImage) return baseImage  is 
+        newImage : baseImage;
     begin
         newImage.width := 1;
     return newImage;

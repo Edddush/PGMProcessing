@@ -14,7 +14,7 @@ with ada.strings.unbounded.Text_IO; use ada.strings.unbounded.Text_IO;
 
 package body imagepgm is
     --read data from an ASCII file and store into a record--
-    procedure readPGM(data: out image; file: in unbounded_string) is
+    procedure readPGM(data: out baseImage; file: in unbounded_string) is
         inputfp : file_type;
     begin
         open(inputfp, in_file, to_string(file));
@@ -44,7 +44,7 @@ package body imagepgm is
 
 
     --write image data from a record into an ASCII file--    
-    procedure writePGM(data: in image; file: in unbounded_string) is
+    procedure writePGM(data: in baseImage; file: in unbounded_string) is
         outputFp : file_type;
     begin
     

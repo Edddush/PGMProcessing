@@ -16,7 +16,7 @@ with ada.Integer_Text_IO; use Ada.Integer_Text_IO;
 with ada.strings.unbounded; use ada.strings.unbounded;
 with ada.strings.unbounded.Text_IO; use ada.strings.unbounded.Text_IO;
 
-procedure main is
+procedure image is
 -- start of read and write subprograms --
     --check if the file exists--
     function validateFile(file : in unbounded_string ) return boolean is
@@ -54,6 +54,7 @@ procedure main is
         if valid then
             put_line("The file already exists, would you like to overwrite it?(Y/N)");
             get(overwrite);
+            skip_line;
         else 
             return fileName;
         end if;
@@ -76,7 +77,7 @@ procedure main is
 --end of read and write--
     iMax       : integer;
     iMin       : integer;
-    recData    : image;
+    recData    : baseImage;
     choice     : integer;
     validData  : boolean;
     fileName   : unbounded_string;
@@ -84,41 +85,41 @@ begin
     choice   := 0; 
     --fileName := getInputFile;
 
-        while choice /= 7 loop 
-            put_line("----------Image Processing----------");
-            new_line;
-            put_line("1. Read in PGM image from file");
-            put_line("2. Apply image inversion");
-            put_line("3. Apply LOG function");
-            put_line("4. Apply contrast stretching");
-            put_line("5. Apply histogram equalization");
-            put_line("6. Write PGM image to file");
-            put_line("7. Quit");
-            new_line;
-            put_line("Enter your choice:");
-            get(choice);
-            skip_line;
-            
-            case choice is
-                when 1 =>
-                    fileName := getInputFile;
-                    readPGM (recData, fileName);
-                when 2 =>
-                    put_line("choice 2");
-                when 3 =>
-                    put_line("choice 3");
-                when 4 =>
-                    put_line("choice 4");
-                when 5 =>
-                    put_line("choice 5");
-                when 6 =>
-                    fileName := getOutputFile;
-                    writePGM(recData, fileName);
-                when 7 =>
-                    put_line("choice 7");
-                when others =>
-                    put_line("Please choose an option from the menu");
-            end case;
+    while choice /= 7 loop 
+        put_line("----------Image Processing----------");
+        new_line;
+        put_line("1. Read in PGM image from file");
+        put_line("2. Apply image inversion");
+        put_line("3. Apply LOG function");
+        put_line("4. Apply contrast stretching");
+        put_line("5. Apply histogram equalization");
+        put_line("6. Write PGM image to file");
+        put_line("7. Quit");
+        new_line;
+        put_line("Enter your choice:");
+        get(choice);
+        skip_line;
+        
+        case choice is
+            when 1 =>
+                fileName := getInputFile;
+                readPGM (recData, fileName);
+            when 2 =>
+                put_line("choice 2");
+            when 3 =>
+                put_line("choice 3");
+            when 4 =>
+                put_line("choice 4");
+            when 5 =>
+                put_line("choice 5");
+            when 6 =>
+                fileName := getOutputFile;
+                writePGM(recData, fileName);
+            when 7 =>
+                put_line("I hope you enjoyed the program. THANK YOU!");
+            when others =>
+                put_line("Please choose an option from the menu");
+        end case;
     end loop;
 return;
-end main;
+end image;

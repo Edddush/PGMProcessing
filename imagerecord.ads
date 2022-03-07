@@ -9,7 +9,7 @@ with ada.strings.unbounded; use Ada.Strings.Unbounded;
 package imageRecord is
     type matrix is array(1..500,1..500) of integer;
  
-    type image is 
+    type baseImage is 
         record
             magicId    : unbounded_string;
             width      : integer;
