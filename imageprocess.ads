@@ -12,11 +12,12 @@
 --          4. call makeHIST on a record to calculate its histogram
 --          5. call histEQUAL on a record to perform its histogram equalization 
 ----------------------------------------------------------------------------------------------------
+with imagerecord; use imagerecord;
 
 package imageprocess is
     function imageINV(data: in image) return image;
     function imageLOG(data: in image) return image;
-    function imageSTRETCH(data: in image, iMax: in integer, iMin: in integer) return image;
+    function imageSTRETCH(data: in image; iMax: in integer; iMin: in integer) return image;
     function makeHIST(data: in image) return image;
     function histEQUAL(data: in image) return image;
-end imageprocess
+end imageprocess;

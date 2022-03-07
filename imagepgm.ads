@@ -13,6 +13,6 @@
 with imageRecord; use imageRecord;
 
 package imagepgm is
-    procedure readPGM(data: out image, file: in unbounded_string);
-    procedure writePGM(data: in image, file: in unbounded_string);
+    procedure readPGM(data: out image; file: in unbounded_string);
+    procedure writePGM(data: in image; file: in unbounded_string);
 end imagepgm;
