@@ -25,6 +25,12 @@ procedure image is
         return exists(to_string(file));
     end validateFile;
 
+    --check if content of file are valid--
+    function validateFile(file : in unbounded_string ) return boolean is
+    begin 
+        return exists(to_string(file));
+    end validateFile;
+    
     --get the name of the file to read from--
     function getInputFile return unbounded_string is
         fileName : unbounded_string;
@@ -43,7 +49,6 @@ procedure image is
     --get the name of the file to output to. If it exists confirm overwrite first-- 
     function getOutputFile return unbounded_string is
         fileName  : unbounded_string;
-        invalid   : boolean;
         overwrite : character;
         valid     : boolean; 
     begin
@@ -81,10 +86,12 @@ procedure image is
     recData    : baseImage;
     choice     : integer;
     validData  : boolean;
+    histogram  : hist;
     fileName   : unbounded_string;
 begin
-    choice   := 0; 
-    --fileName := getInputFile;
+    choice      := 0; 
+    fileName    := getInputFile;
+    validData   := validateData(fileName);
 
     while choice /= 7 loop 
         put_line("----------Image Processing----------");
@@ -120,11 +127,13 @@ begin
                 recData := imageSTRETCH(recData, iMax, iMin);
                 put_line("You have applied contrast stretching");
             when 5 =>
+                histogram := makeHIST(recData);
+                recData := histEQUAL(recData, histogram);
                 put_line("You have applied histogram equalization");
             when 6 =>
-                put_line("You have output the image data to a file");
                 fileName := getOutputFile;
                 writePGM(recData, fileName);
+                put_line("You have output the image data to a file");
             when 7 =>
                 put_line("You have quit the program. GOODBYE!");
             when others =>

@@ -41,7 +41,7 @@ package body imageprocess is
         for i in 1..data.height loop
             for j in 1..data.width loop
                 pixel := log(float(data.pixel(i,j)) + 1.0) * (255.0/log(255.0));
-                logImage.pixel(i,j):= integer(pixel-1.0);
+                logImage.pixel(i,j):= integer(pixel);
             end loop;
         end loop;
 
@@ -66,7 +66,7 @@ package body imageprocess is
 
         for i in 1..data.height loop
             for j in 1..data.height loop 
-                pixel := abs(255.0 * (float(data.pixel(i,j) - min)/float(max-min)));
+                pixel := abs((255.0 * float(data.pixel(i,j) - min))/float(max-min));
                 stretchImage.pixel(i,j):= integer(pixel);
 
                 --the pixel should be less or equal to the maxval-- 
@@ -81,19 +81,61 @@ package body imageprocess is
 
 
     --calculate its histogram--
-    function makeHIST(data: in baseImage) return baseImage is 
-        histImage : baseImage; 
+    function makeHIST(data: in baseImage) return hist is 
+        histImage : hist := (others => 0); 
+        element   :  integer; 
     begin
-        histImage.width := 1;
-    return histImage;
+
+        for i in 1..data.height loop
+            for j in 1..data.width loop
+                element := data.pixel(i, j);
+
+                -- H[1] = number of pixels with value 0
+                histImage(element + 1) := histImage(element);
+            end loop;
+        end loop;
+        return histImage;
     end makeHIST;
 
 
     --perform its histogram equalization--
-    function histEQUAL(data: in baseImage) return baseImage  is 
-        equalImage : baseImage;
+    function histEQUAL(data: in baseImage; histogram : in hist ) return baseImage  is 
+        probabilityFunc : histFunc := (others => 0.0); 
+        cumulHist       : histFunc := (others => 0.0); 
+        totalPixels     : integer;    
+        equalImage      : baseImage;
+        sum             : float;
+        
     begin
-        equalImage.width := 1;
-    return equalImage;
+        sum         := 0.0;
+        totalPixels := data.width * data.height;
+
+        -- calculate pdf by dividing each element by the total number of pixels -- 
+        for element in 1..256 loop
+            probabilityFunc(element) := float(histogram(element) / totalPixels);
+        end loop;
+
+        -- calculate CH by making each value the cumulative value from the PDF -- 
+            -- after that multiply the value by 255 and round --  
+        for i in 1..256 loop
+            sum := sum + probabilityFunc(i);
+            cumulHist(i) := sum;
+            cumulHist(i) := float'rounding(255.0 * cumulHist(i));
+        end loop;
+
+        -- map grayscale values one by one --
+        equalImage.magicId := data.magicId;
+        equalImage.width   := data.width;
+        equalImage.height  := data.height;
+        equalImage.maxVal  := data.maxVal;
+
+        for j in 1..data.height loop
+            for k in 1..data.width loop
+                equalImage.pixel(j,k) := integer(cumulHist(data.pixel(j,k)));
+            end loop;
+        end loop;
+
+        return equalImage;
     end histEQUAL;
+    --end of package--
 end imageprocess;

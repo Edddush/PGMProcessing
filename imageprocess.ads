@@ -15,9 +15,14 @@
 with imagerecord; use imagerecord;
 
 package imageprocess is
+    
+    
     function imageINV(data: in baseImage) return baseImage;
     function imageLOG(data: in baseImage) return baseImage;
     function imageSTRETCH(data: in baseImage; iMax: in integer; iMin: in integer) return baseImage;
-    function makeHIST(data: in baseImage) return baseImage;
-    function histEQUAL(data: in baseImage) return baseImage;
+    
+    type hist is array(1..256) of integer;
+    type histFunc is array(1..256) of float;
+    function makeHIST(data: in baseImage) return hist;
+    function histEQUAL(data: in baseImage; histogram : in hist) return baseImage;
 end imageprocess;
