@@ -91,7 +91,7 @@ package body imageprocess is
                 element := data.pixel(i, j);
 
                 -- H[1] = number of pixels with value 0
-                histImage(element + 1) := histImage(element);
+                histImage(element + 1) := histImage(element + 1) + 1;
             end loop;
         end loop;
         return histImage;
@@ -100,8 +100,8 @@ package body imageprocess is
 
     --perform its histogram equalization--
     function histEQUAL(data: in baseImage; histogram : in hist ) return baseImage  is 
-        probabilityFunc : histFunc := (others => 0.0); 
-        cumulHist       : histFunc := (others => 0.0); 
+        probabilityFunc : histFunc;
+        cumulHist       : histFunc;
         totalPixels     : integer;    
         equalImage      : baseImage;
         sum             : float;
@@ -112,7 +112,7 @@ package body imageprocess is
 
         -- calculate pdf by dividing each element by the total number of pixels -- 
         for element in 1..256 loop
-            probabilityFunc(element) := float(histogram(element) / totalPixels);
+            probabilityFunc(element) := float(histogram(element)) / float(totalPixels);
         end loop;
 
         -- calculate CH by making each value the cumulative value from the PDF -- 

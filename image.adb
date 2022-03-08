@@ -12,7 +12,6 @@ with imageprocess; use imageprocess;
 with imageRecord; use imageRecord;
 with ada.Text_IO; use Ada.Text_IO;
 with ada.directories; use ada.directories;
-with ada.IO_Exceptions; use Ada.IO_Exceptions;
 with ada.Integer_Text_IO; use Ada.Integer_Text_IO;
 with ada.strings.unbounded; use ada.strings.unbounded;
 with ada.strings.unbounded.Text_IO; use ada.strings.unbounded.Text_IO;
@@ -20,17 +19,35 @@ with ada.strings.unbounded.Text_IO; use ada.strings.unbounded.Text_IO;
 procedure image is
 -- start of read and write subprograms --
     --check if the file exists--
-    function validateFile(file : in unbounded_string ) return boolean is
-    begin 
-        return exists(to_string(file));
-    end validateFile;
+    function validateData(imageRec : baseImage) return boolean is
+        count : integer := 0;
+    begin    
+        if(imageRec.magicId /= "P2" and imageRec.magicId /= "p2") then
+            return false;
+        end if;
+
+        for i in 1..imageRec.height loop
+            for j in 1..imageRec.width loop
+                count := count + 1;
+                if imageRec.pixel(i,j) > imageRec.maxVal then
+                    return false;
+                end if;
+            end loop;
+        end loop;
+
+        if count > (imageRec.width * imageRec.height) then
+            return false;
+        end if;
+
+        return true;
+    end validateData;
 
     --check if content of file are valid--
     function validateFile(file : in unbounded_string ) return boolean is
     begin 
         return exists(to_string(file));
     end validateFile;
-    
+
     --get the name of the file to read from--
     function getInputFile return unbounded_string is
         fileName : unbounded_string;
@@ -89,9 +106,8 @@ procedure image is
     histogram  : hist;
     fileName   : unbounded_string;
 begin
-    choice      := 0; 
-    fileName    := getInputFile;
-    validData   := validateData(fileName);
+    choice      := 1;
+    
 
     while choice /= 7 loop 
         put_line("----------Image Processing----------");
@@ -112,6 +128,12 @@ begin
             when 1 =>
                 fileName := getInputFile;
                 readPGM (recData, fileName);
+                validData := validateData(recData);
+
+                if not validData then 
+                    put_line("ERROR File has inconsistencies");
+                    return;
+                end if;
             when 2 =>
                 recData := imageINV(recData); 
                 put_line("You have applied inversion");

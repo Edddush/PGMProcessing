@@ -11,7 +11,6 @@
 ----------------------------------------------------------------------------------------------------
 
 with imageRecord; use imageRecord;
-with ada.IO_Exceptions; use Ada.IO_Exceptions;
 with ada.strings.unbounded; use Ada.Strings.Unbounded;
 
 package imagepgm is
