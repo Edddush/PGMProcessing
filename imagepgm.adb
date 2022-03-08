@@ -65,7 +65,10 @@ package body imagepgm is
 
         set_output(standard_output);
         --close file pointer!--
-        close(outputFp);
+        if is_open(outputFp) then
+            close(outputFp);
+        end if;
+       -- close(outputFp);
     end writePGM;
 end imagepgm;
 

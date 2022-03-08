@@ -8,6 +8,7 @@
 --     and transformations they would like to apply to an image.
 ------------------------------------------------------------------------
 with imagepgm; use imagepgm;
+with imageprocess; use imageprocess;
 with imageRecord; use imageRecord;
 with ada.Text_IO; use Ada.Text_IO;
 with ada.directories; use ada.directories;
@@ -105,14 +106,23 @@ begin
                 fileName := getInputFile;
                 readPGM (recData, fileName);
             when 2 =>
-                put_line("choice 2");
+                recData := imageINV(recData); 
+                put_line("You have applied inversion");
             when 3 =>
-                put_line("choice 3");
+                recData := imageLOG(recData);
+                put_line("You have applied Log function");
             when 4 =>
-                put_line("choice 4");
+                put_line("What is the maximum intensity?");
+                get(iMax);
+                put_line("What is the minimum intensity?");
+                get(iMin);
+
+                recData := imageSTRETCH(recData, iMax, iMin);
+                put_line("You have applied contrast stretching");
             when 5 =>
-                put_line("choice 5");
+                put_line("You have applied histogram equalization");
             when 6 =>
+                put_line("You have output the image data to a file");
                 fileName := getOutputFile;
                 writePGM(recData, fileName);
             when 7 =>
